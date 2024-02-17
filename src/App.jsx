@@ -3,7 +3,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./layouts/Home/Index";
 import PharmacyPage from "./layouts/Pharmacy/Index";
 import AddDrug, { addDrugAction } from "./components/Pharmacy/AddDrug/Index";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
+AOS.init();
 const router = createBrowserRouter([
   {
     path: "/",

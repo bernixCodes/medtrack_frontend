@@ -8,12 +8,16 @@ const About2 = () => {
         <img src={doc} alt="" />
       </div>
       <div className="about2-info">
-        <h2 className="title">
+        <h2 className="title" data-aos="fade-left" data-aos-duration="2000">
           We carry out various <span style={{ color: "#00BCD1" }}>studies</span>{" "}
           and analysis
         </h2>
 
-        <div className="list-group">
+        <div
+          className="list-group"
+          data-aos="fade-left"
+          data-aos-duration="1000"
+        >
           <p>
             <i className="fa fa-arrow-right"></i> &nbsp; Viral infections
           </p>

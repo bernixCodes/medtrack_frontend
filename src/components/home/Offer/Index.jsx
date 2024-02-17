@@ -2,7 +2,7 @@ import "./offer.css";
 
 const Offer = () => {
   return (
-    <div className="offer">
+    <div className="offer" data-aos="fade-up">
       <div className="offer-1">
         <i className="fa fa-user-md icon" aria-hidden="true"></i>
         <div className="info">

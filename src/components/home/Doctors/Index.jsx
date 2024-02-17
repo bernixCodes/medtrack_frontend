@@ -7,8 +7,20 @@ import "./doctors.css";
 const Doctors = () => {
   return (
     <div className="docs-main">
-      <p className="our-doctors">Our Doctors</p>
-      <h3 className="doc-title">
+      <p
+        className="our-doctors"
+        data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine"
+      >
+        Our Doctors
+      </p>
+      <h3
+        className="doc-title"
+        data-aos="fade-right"
+        data-aos-offset="200"
+        data-aos-easing="ease-in-sine"
+      >
         We have the best <span style={{ color: "#00BCD1" }}>specialists</span>{" "}
         in the area
       </h3>

@@ -6,7 +6,12 @@ const Footer = () => {
     <footer>
       <div className="footer-main">
         <div className="footer-top">
-          <div className="footer-subscribe">
+          <div
+            className="footer-subscribe"
+            data-aos="fade-up"
+            data-aos-anchor-placement="center-center"
+            data-aos-duration="3000"
+          >
             <input type="email" placeholder="Your E-mail" />
             <button>Subscribe</button>
           </div>
@@ -23,7 +28,7 @@ const Footer = () => {
         <div className="footer-mid">
           <div className="footer-info">
             <img src={pic} alt="" className="logo" />
-            <p>
+            <p data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
               Our medical center offers the widest range of services in the
               area. We strive to provide our patients with the most high-quality
               help by top-notch experts in their fields.
@@ -31,7 +36,11 @@ const Footer = () => {
           </div>
 
           <div className="footer-sub">
-            <div className="footer-departments">
+            <div
+              className="footer-departments"
+              data-aos="fade-right"
+              data-aos-duration="500"
+            >
               <h2>Departments</h2>
               <p>Laboratory Analysis</p>
               <p>Pediatric</p>
@@ -48,7 +57,11 @@ const Footer = () => {
               <p>Rehabilitation</p>
             </div>
 
-            <div className="footer-quicklinks">
+            <div
+              className="footer-quicklinks"
+              data-aos="fade-left"
+              data-aos-duration="500"
+            >
               <h2>Quick Links</h2>
               <p>Home</p>
               <p>Pharmacy</p>
@@ -61,8 +74,12 @@ const Footer = () => {
       </div>
       <div className="footer-sign">
         <div className="sign-info">
-          <p>&copy; 2024 MedCare. All rights reserved.</p>
-          <p>Privacy Policy</p>
+          <p data-aos="fade-right" data-aos-duration="2000">
+            &copy; 2024 MedCare. All rights reserved.
+          </p>
+          <p data-aos="fade-left" data-aos-duration="2000">
+            Privacy Policy
+          </p>
         </div>
       </div>
     </footer>

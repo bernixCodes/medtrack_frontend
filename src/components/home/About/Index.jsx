@@ -6,7 +6,7 @@ const About = () => {
     <div className="about-main">
       <div className="about-info">
         <p className="about-us">About Us</p>
-        <h2 className="title">
+        <h2 className="title" data-aos="fade-right" data-aos-duration="2000">
           Clinic with <span style={{ color: "#00BCD1" }}>innovative</span>{" "}
           approach to treatment
         </h2>
