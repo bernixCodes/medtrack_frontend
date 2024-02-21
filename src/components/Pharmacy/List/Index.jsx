@@ -1,9 +1,12 @@
 import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import "./pharmList.css";
+import DeleteModal from "../DeleteModal/Index";
 
 const PharmacyList = () => {
   const drugs = useLoaderData();
-  console.log(drugs);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [drugIdToDelete, setDrugIdToDelete] = useState(null);
 
   function truncateDescription(description, maxWords = 12) {
     if (description.length > maxWords) {
@@ -29,12 +32,17 @@ const PharmacyList = () => {
   };
 
   const handleDeleteDrug = async (id) => {
-    const continueDelete = confirm(
-      "Are you sure you want to delete this record? "
-    );
-    if (continueDelete == true) {
-      await deleteAction(id);
-    }
+    setDrugIdToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    await deleteAction(drugIdToDelete);
+    setShowDeleteModal(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
   };
 
   return (
@@ -42,12 +50,17 @@ const PharmacyList = () => {
       <Outlet />
 
       <div className="pharm-actions">
-        <button>View Stats</button>
+        <Link to={"drug-stats"}>
+          <button>View Stats</button>
+        </Link>
+
         <Link to={"add-drug"}>
           <button>Add Drug</button>
         </Link>
       </div>
-
+      {showDeleteModal && (
+        <DeleteModal onCancel={cancelDelete} onConfirm={confirmDelete} />
+      )}
       <div className="pharm-data">
         {drugs && drugs.length > 0 ? (
           <table>
@@ -61,7 +74,7 @@ const PharmacyList = () => {
                 <th scope="col">Drug Code</th>
                 <th scope="col">Pricing Unit</th>
                 <th scope="col">Price (GHc)</th>
-                <th scope="col">Action</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -75,12 +88,19 @@ const PharmacyList = () => {
                   <td data-label="Unit of Pricing">{drug.unitPrice}</td>
                   <td data-label="Period">{drug.drugPrice}</td>
                   <td data-label="" className="action-icons">
+                    <Link to={`/pharmacy/drug-detail/${drug._id}`}>
+                      <i
+                        style={{ color: "dimgrey" }}
+                        className="fa fa-eye"
+                        aria-hidden="true"
+                      ></i>
+                    </Link>
+                    <Link to={`/pharmacy/edit-drug/${drug._id}`}>
+                      <i className="fas fa-edit"></i>
+                    </Link>
                     <div onClick={() => handleDeleteDrug(drug._id)}>
                       <i className="fas fa-trash-alt"></i>
                     </div>
-                    <Link>
-                      <i className="fas fa-edit"></i>
-                    </Link>
                   </td>
                 </tr>
               ))}

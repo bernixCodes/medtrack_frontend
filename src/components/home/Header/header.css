@@ -7,6 +7,9 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
+.home-link{
+  display: none;
+}
 
 .logo {
   object-fit: contain;
@@ -44,5 +47,9 @@ nav {
   .navLinks li {
     margin-left: 35px;
     font-size: 18px;
+  }
+
+  .home-link{
+    display: flex;
   }
 }

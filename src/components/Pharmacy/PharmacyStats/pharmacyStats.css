@@ -1,0 +1,15 @@
+.stats-container{
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+}
+
+
+.wrapper {
+  
+    height: 200%;
+  
+  }

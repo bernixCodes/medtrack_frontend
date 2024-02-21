@@ -1,0 +1,19 @@
+.details-div{
+    display: flex;
+    gap: 5rem;   
+
+}
+
+.details-text{
+    display: flex;
+    flex-direction: column;
+    /* gap: 2rem; */
+    color: white;
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    .details-div{
+        flex-direction: column;
+    }
+}

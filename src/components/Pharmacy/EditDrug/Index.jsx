@@ -1,27 +1,25 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Form } from "react-router-dom";
-import "./addDrug.css";
-import { useState } from "react";
-// import { CSSTransition } from "react-transition-group";
+import { Form, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import "../AddDrug/addDrug.css";
 
-const handleAddDrug = async (e) => {
+const handleEditDrug = async (e, drugId) => {
   e.preventDefault();
   let formData = new FormData(e.target);
   let data = {
-    drugName: formData.get("name"),
+    drugName: formData.get("drugName"),
     description: formData.get("description"),
-    drugCode: formData.get("code"),
-    unitPrice: formData.get("unit"),
-    drugPrice: formData.get("price"),
+    drugCode: formData.get("drugCode"),
+    unitPrice: formData.get("unitPrice"),
+    drugPrice: formData.get("drugPrice"),
+    id: drugId,
   };
-  console.log(data);
-  await addDrugAction(data);
+  await editDrug(data);
 };
-
-export const addDrugAction = async (data) => {
-  const url = "https://medtrack-restapi.onrender.com/api/drugs";
+export const editDrug = async (data) => {
+  const url = `https://medtrack-restapi.onrender.com/api/drugs/${data.id}`;
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: "bernice",
       "Content-Type": "application/json",
@@ -33,23 +31,50 @@ export const addDrugAction = async (data) => {
   return res;
 };
 
-const AddDrug = () => {
-  const [loading, setLoading] = useState(false);
-  const handleClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+const EditDrug = () => {
+  const { drugId } = useParams();
+  const [drug, setDrug] = useState({
+    drugName: "",
+    description: "",
+    drugCode: "",
+    unitPrice: "",
+    drugPrice: "",
+  });
+  useEffect(() => {
+    const url = `https://medtrack-restapi.onrender.com/api/drugs/${drugId}`;
+
+    const drugDetails = async () => {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: "bernice",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setDrug(data);
+      return data;
+    };
+    drugDetails();
+  }, [drugId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setDrug((prevDrug) => ({
+      ...prevDrug,
+      [name]: value,
+    }));
   };
+
   return (
     <div className="wrapper">
       <div className="modal">
-        <h1>Add Drug</h1>
+        <h1>Edit Drug</h1>
 
         <Form
-          method="post"
-          action="/pharmacy/add-drug"
-          onSubmit={handleAddDrug}
+          method="put"
+          onSubmit={(e) => handleEditDrug(e, drugId)}
           className="form"
         >
           <div className="form-group">
@@ -58,8 +83,10 @@ const AddDrug = () => {
               type="text"
               id="name"
               placeholder="Drug Name"
-              name="name"
+              name="drugName"
               required="required"
+              value={drug.drugName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
@@ -68,15 +95,21 @@ const AddDrug = () => {
               type="text"
               id="code"
               placeholder="Drug Code"
-              name="code"
+              name="drugCode"
               required="required"
+              value={drug.drugCode}
+              onChange={handleInputChange}
             />
           </div>
 
           <div className="form-group">
             <div className="select">
               <label htmlFor="unit">Unit of Pricing</label>
-              <select name="unit">
+              <select
+                name="unitPrice"
+                value={drug.unitPrice}
+                onChange={handleInputChange}
+              >
                 <option value={""}>Select</option>
                 <option value={"Tablet"}>Tablet</option>
                 <option value={"Capsule"}>Capsule</option>
@@ -91,8 +124,10 @@ const AddDrug = () => {
                 type="text"
                 id="price"
                 placeholder="Drug Price"
-                name="price"
+                name="drugPrice"
                 required="required"
+                value={drug.drugPrice}
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -103,17 +138,13 @@ const AddDrug = () => {
               placeholder="Drug Description"
               name="description"
               rows={8}
+              value={drug.description}
+              onChange={handleInputChange}
             ></textarea>
           </div>
 
           <div className="form-group">
-            <button
-              className={`button-animation ${loading ? "loading" : ""}`}
-              onClick={handleClick}
-            >
-              {" "}
-              {loading ? "Adding..." : "Add Drug"}
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </Form>
         <a href="/pharmacy" className="modal__close">
@@ -125,4 +156,4 @@ const AddDrug = () => {
   );
 };
 
-export default AddDrug;
+export default EditDrug;

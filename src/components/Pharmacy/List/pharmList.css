@@ -41,8 +41,10 @@
   align-items: center;
   justify-content: center;
 }
+
+
 table {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-collapse: collapse;
   margin: 0;
   padding: 0;
@@ -63,6 +65,7 @@ table tr {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   padding: 0.35em;
+
 }
 
 table tr:nth-child(even) {
@@ -73,6 +76,11 @@ table th,
 table td {
   padding: 0.625em;
   text-align: center;
+}
+
+thead tr th{
+  background-color: #ddd;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 table th {

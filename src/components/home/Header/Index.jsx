@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import "./header.css";
 
@@ -6,9 +6,11 @@ const Header = () => {
   return (
     <nav>
       <div className="nav-data">
-        <img src={logo} alt="" className="logo" />
+        <Link to={"/"}>
+          <img src={logo} alt="" className="logo" />
+        </Link>
         <ul className="navLinks">
-          <li>
+          <li className="home-link">
             <NavLink exact="true" to={"/"} activeclassname="active">
               Home
             </NavLink>
