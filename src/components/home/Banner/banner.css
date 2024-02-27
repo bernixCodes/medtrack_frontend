@@ -5,6 +5,7 @@
   background-size: cover;
   background-position: center;
   padding: 10%;
+  overflow: hidden;
 }
 
 .banner-info {

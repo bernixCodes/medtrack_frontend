@@ -162,7 +162,7 @@ const EditDrug = () => {
               <div className="form-group">
                 <button type="submit">
                   {" "}
-                  {submiting ? "Subitting..." : "Submit"}
+                  {submiting ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </Form>

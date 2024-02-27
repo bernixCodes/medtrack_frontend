@@ -1,13 +1,21 @@
+/* eslint-disable no-unused-vars */
 import { Link, Outlet, useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import "./pharmList.css";
 import DeleteModal from "../DeleteModal/Index";
+import Pagination from "../../globals/Pagination/Pagination";
 
 const PharmacyList = () => {
   const drugs = useLoaderData();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [drugIdToDelete, setDrugIdToDelete] = useState(null);
   const [drugToDelete, setDrugToDelete] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [listPerPage, setListPerPage] = useState(10);
+  const lastIndex = currentPage * listPerPage;
+  const firstIndex = lastIndex - listPerPage;
+  const currentLists = drugs.slice(firstIndex, lastIndex);
 
   function truncateDescription(description, maxWords = 25) {
     if (description.length > maxWords) {
@@ -69,55 +77,65 @@ const PharmacyList = () => {
       )}
       <div className="pharm-data">
         {drugs && drugs.length > 0 ? (
-          <table>
-            <caption>
-              {/* <i className="fas fa-search" aria-hidden="true"></i> */}
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col" className="col-1">
-                  Drug Name
-                </th>
-                <th scope="col" className="col-2">
-                  Description
-                </th>
-                <th scope="col">Drug Code</th>
-                <th scope="col">Pricing Unit</th>
-                <th scope="col">Price (GHc)</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {drugs.map((drug) => (
-                <tr key={drug._id} style={{ cursor: "pointer" }}>
-                  <td data-label="Drug Name">{drug.drugName}</td>
-                  <td data-label="Description" title={drug.description}>
-                    {truncateDescription(`${drug.description}`)}
-                  </td>
-                  <td data-label="Drug Code">{drug.drugCode}</td>
-                  <td data-label="Unit of Pricing">{drug.unitPrice}</td>
-                  <td data-label="Price">{drug.drugPrice}</td>
-                  <td data-label="" className="action-icons">
-                    <Link to={`/pharmacy/drug-detail/${drug._id}`}>
-                      <i
-                        style={{ color: "dimgrey" }}
-                        className="fa fa-eye"
-                        aria-hidden="true"
-                      ></i>
-                    </Link>
-                    <Link to={`/pharmacy/edit-drug/${drug._id}`}>
-                      <i className="fas fa-edit"></i>
-                    </Link>
-                    <div
-                      onClick={() => handleDeleteDrug(drug._id, drug.drugName)}
-                    >
-                      <i className="fas fa-trash-alt"></i>
-                    </div>
-                  </td>
+          <>
+            <table>
+              <caption>
+                {/* <i className="fas fa-search" aria-hidden="true"></i> */}
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" className="col-1">
+                    Drug Name
+                  </th>
+                  <th scope="col" className="col-2">
+                    Description
+                  </th>
+                  <th scope="col">Drug Code</th>
+                  <th scope="col">Pricing Unit</th>
+                  <th scope="col">Price (GHc)</th>
+                  <th scope="col">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentLists.map((drug) => (
+                  <tr key={drug._id} style={{ cursor: "pointer" }}>
+                    <td data-label="Drug Name">{drug.drugName}</td>
+                    <td data-label="Description" title={drug.description}>
+                      {truncateDescription(`${drug.description}`)}
+                    </td>
+                    <td data-label="Drug Code">{drug.drugCode}</td>
+                    <td data-label="Unit of Pricing">{drug.unitPrice}</td>
+                    <td data-label="Price">{drug.drugPrice}</td>
+                    <td data-label="" className="action-icons">
+                      <Link to={`/pharmacy/drug-detail/${drug._id}`}>
+                        <i
+                          style={{ color: "dimgrey" }}
+                          className="fa fa-eye"
+                          aria-hidden="true"
+                        ></i>
+                      </Link>
+                      <Link to={`/pharmacy/edit-drug/${drug._id}`}>
+                        <i className="fas fa-edit"></i>
+                      </Link>
+                      <div
+                        onClick={() =>
+                          handleDeleteDrug(drug._id, drug.drugName)
+                        }
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Pagination
+              totalLists={drugs.length}
+              listPerPage={listPerPage}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+          </>
         ) : (
           <p>No drug available</p>
         )}

@@ -39,7 +39,7 @@ const Footer = () => {
             <div
               className="footer-departments"
               data-aos="fade-right"
-              data-aos-duration="500"
+              data-aos-duration="5000"
             >
               <h2>Departments</h2>
               <p>Laboratory Analysis</p>

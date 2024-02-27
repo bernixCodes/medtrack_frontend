@@ -3,7 +3,7 @@
   justify-content: space-between;
   /* gap: 5rem; */
   background: #d4ecf7;
-
+overflow: hidden;
   position: relative;
   top: 2rem;
 }
@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-  margin: 1rem;
+  margin: 3rem;
 }
 
 .about2-info .title {
