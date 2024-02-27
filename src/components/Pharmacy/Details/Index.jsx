@@ -109,11 +109,7 @@ const DrugDetail = () => {
                 <div className="select">
                   <label htmlFor="unit">Unit of Pricing</label>
                   <select name="unit" value={drug.unitPrice}>
-                    {/* <option value={""}>Select</option>
-                  <option value={"Tablet"}>Tablet</option>
-                  <option value={"Capsule"}>Capsule</option>
-                  <option value={"Vials"}>Vials</option>
-                  <option value={"Ampule"}>Ampule</option> */}
+                    <option value={drug.unitPrice}>{drug.unitPrice}</option>
                   </select>
                 </div>
 
