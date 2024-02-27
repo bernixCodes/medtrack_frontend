@@ -8,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import PharmacyStats from "./components/Pharmacy/PharmacyStats/Index";
 import DrugDetail from "./components/Pharmacy/Details/Index";
+import LabPage from "./layouts/Lab/Index";
 
 AOS.init();
 const router = createBrowserRouter([
@@ -56,11 +57,7 @@ const router = createBrowserRouter([
 
   {
     path: "labs",
-    element: (
-      <div>
-        <h1 style={{ color: "red" }}>Labs</h1>
-      </div>
-    ),
+    element: <LabPage />,
   },
 ]);
 

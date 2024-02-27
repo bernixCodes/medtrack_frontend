@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./deletemodal.css";
-const DeleteModal = ({ onCancel, onConfirm }) => {
+const DeleteModal = ({ onCancel, onConfirm, drugToDelete }) => {
   return (
     <>
       <div id="myModal" className="modal-test modal fade" tabIndex="-1">
@@ -16,8 +16,17 @@ const DeleteModal = ({ onCancel, onConfirm }) => {
             </div>
             <div className="modal-body" style={{ margin: "1rem" }}>
               <p>
-                Do you really want to delete these records? This process cannot
-                be undone.
+                Do you really want to delete{" "}
+                <span
+                  style={{
+                    color: "#fff",
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {drugToDelete}
+                </span>{" "}
+                records? This process cannot be undone.
               </p>
             </div>
             <div className="modal-footer justify-content-center">

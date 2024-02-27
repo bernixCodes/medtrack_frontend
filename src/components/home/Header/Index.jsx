@@ -10,21 +10,15 @@ const Header = () => {
           <img src={logo} alt="" className="logo" />
         </Link>
         <ul className="navLinks">
-          <li className="home-link">
-            <NavLink exact="true" to={"/"} activeclassname="active">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/pharmacy"} activeclassname="active">
-              Pharmacy
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"/labs"} activeclassname="active">
-              Labs
-            </NavLink>
-          </li>
+          <NavLink exact="true" to={"/"} activeclassname="active">
+            <li className="home-link">Home</li>
+          </NavLink>
+          <NavLink to={"/pharmacy"} activeclassname="active">
+            <li>Pharmacy</li>
+          </NavLink>
+          <NavLink to={"/labs"} activeclassname="active">
+            <li>Labs</li>
+          </NavLink>
         </ul>
       </div>
     </nav>

@@ -7,8 +7,9 @@ const PharmacyList = () => {
   const drugs = useLoaderData();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [drugIdToDelete, setDrugIdToDelete] = useState(null);
+  const [drugToDelete, setDrugToDelete] = useState(null);
 
-  function truncateDescription(description, maxWords = 12) {
+  function truncateDescription(description, maxWords = 25) {
     if (description.length > maxWords) {
       return description.slice(0, maxWords) + "...";
     } else {
@@ -31,8 +32,9 @@ const PharmacyList = () => {
     return res;
   };
 
-  const handleDeleteDrug = async (id) => {
+  const handleDeleteDrug = async (id, drugName) => {
     setDrugIdToDelete(id);
+    setDrugToDelete(drugName);
     setShowDeleteModal(true);
   };
 
@@ -59,7 +61,11 @@ const PharmacyList = () => {
         </Link>
       </div>
       {showDeleteModal && (
-        <DeleteModal onCancel={cancelDelete} onConfirm={confirmDelete} />
+        <DeleteModal
+          onCancel={cancelDelete}
+          onConfirm={confirmDelete}
+          drugToDelete={drugToDelete}
+        />
       )}
       <div className="pharm-data">
         {drugs && drugs.length > 0 ? (
@@ -69,8 +75,12 @@ const PharmacyList = () => {
             </caption>
             <thead>
               <tr>
-                <th scope="col">Drug Name</th>
-                <th scope="col">Description</th>
+                <th scope="col" className="col-1">
+                  Drug Name
+                </th>
+                <th scope="col" className="col-2">
+                  Description
+                </th>
                 <th scope="col">Drug Code</th>
                 <th scope="col">Pricing Unit</th>
                 <th scope="col">Price (GHc)</th>
@@ -79,14 +89,14 @@ const PharmacyList = () => {
             </thead>
             <tbody>
               {drugs.map((drug) => (
-                <tr key={drug._id}>
+                <tr key={drug._id} style={{ cursor: "pointer" }}>
                   <td data-label="Drug Name">{drug.drugName}</td>
                   <td data-label="Description" title={drug.description}>
                     {truncateDescription(`${drug.description}`)}
                   </td>
                   <td data-label="Drug Code">{drug.drugCode}</td>
                   <td data-label="Unit of Pricing">{drug.unitPrice}</td>
-                  <td data-label="Period">{drug.drugPrice}</td>
+                  <td data-label="Price">{drug.drugPrice}</td>
                   <td data-label="" className="action-icons">
                     <Link to={`/pharmacy/drug-detail/${drug._id}`}>
                       <i
@@ -98,7 +108,9 @@ const PharmacyList = () => {
                     <Link to={`/pharmacy/edit-drug/${drug._id}`}>
                       <i className="fas fa-edit"></i>
                     </Link>
-                    <div onClick={() => handleDeleteDrug(drug._id)}>
+                    <div
+                      onClick={() => handleDeleteDrug(drug._id, drug.drugName)}
+                    >
                       <i className="fas fa-trash-alt"></i>
                     </div>
                   </td>
