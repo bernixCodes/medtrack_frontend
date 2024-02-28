@@ -7,8 +7,12 @@ import HomeStats from "../../components/home/HomeStats/Index";
 import News from "../../components/home/News/Index";
 import Offer from "../../components/home/Offer/Index";
 import Header from "../../components/home/Header/Index";
+import { useEffect } from "react";
 
 const HomePage = () => {
+  useEffect(() => {
+    document.title = "MedCare | Home";
+  }, []);
   return (
     <>
       <Header />

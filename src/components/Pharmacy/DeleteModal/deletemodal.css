@@ -90,3 +90,18 @@
 }
 
 
+@media screen and (max-width: 600px) {
+	
+	.modal-test{
+		position: absolute;
+		top: 4.2rem;
+		left: 1%;
+	}
+	
+}
+
+@media screen and (max-width: 900px) {
+	.modal-test{
+		left: 25%;
+	}
+}
