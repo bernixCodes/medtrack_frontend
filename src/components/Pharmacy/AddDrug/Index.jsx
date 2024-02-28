@@ -1,24 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Form } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import "./addDrug.css";
 import { useState } from "react";
+
 // import { CSSTransition } from "react-transition-group";
 
-const handleAddDrug = async (e) => {
-  e.preventDefault();
-  let formData = new FormData(e.target);
-  let data = {
-    drugName: formData.get("name"),
-    description: formData.get("description"),
-    drugCode: formData.get("code"),
-    unitPrice: formData.get("unit"),
-    drugPrice: formData.get("price"),
-  };
-  console.log(data);
-  await addDrugAction(data);
-};
-
-export const addDrugAction = async (data) => {
+export const AddDrugAction = async (data) => {
   const url = "https://medtrack-restapi.onrender.com/api/drugs";
   const response = await fetch(url, {
     method: "POST",
@@ -29,18 +16,38 @@ export const addDrugAction = async (data) => {
     body: JSON.stringify(data),
   });
   const res = await response.json();
-  window.location.href = "/pharmacy";
+  window.location.replace("/pharmacy");
   return res;
 };
 
 const AddDrug = () => {
   const [loading, setLoading] = useState(false);
+  const [submiting, setSubmitting] = useState(false);
+
   const handleClick = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 5000);
   };
+
+  const handleAddDrug = async (e) => {
+    e.preventDefault();
+    setSubmitting(false);
+    let formData = new FormData(e.target);
+    let data = {
+      drugName: formData.get("name"),
+      description: formData.get("description"),
+      drugCode: formData.get("code"),
+      unitPrice: formData.get("unit"),
+      drugPrice: formData.get("price"),
+    };
+
+    await AddDrugAction(data);
+
+    setSubmitting(true);
+  };
+
   return (
     <div className="wrapper">
       <div className="modal">
@@ -60,6 +67,7 @@ const AddDrug = () => {
               placeholder="Drug Name"
               name="name"
               required="required"
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -70,6 +78,7 @@ const AddDrug = () => {
               placeholder="Drug Code"
               name="code"
               required="required"
+              autoComplete="off"
             />
           </div>
 
@@ -93,6 +102,7 @@ const AddDrug = () => {
                 placeholder="Drug Price"
                 name="price"
                 required="required"
+                autoComplete="off"
               />
             </div>
           </div>
@@ -112,13 +122,13 @@ const AddDrug = () => {
               onClick={handleClick}
             >
               {" "}
-              {loading ? "Adding..." : "Add Drug"}
+              {submiting ? "Adding..." : "Add Drug"}
             </button>
           </div>
         </Form>
-        <a href="/pharmacy" className="modal__close">
+        <Link to="/pharmacy" className="modal__close">
           &times;
-        </a>
+        </Link>
         {/* </div> */}
       </div>
     </div>

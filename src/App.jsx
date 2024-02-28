@@ -2,7 +2,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./layouts/Home/Index";
 import PharmacyPage from "./layouts/Pharmacy/Index";
-import AddDrug, { addDrugAction } from "./components/Pharmacy/AddDrug/Index";
+import AddDrug, { AddDrugAction } from "./components/Pharmacy/AddDrug/Index";
 import EditDrug, { editDrug } from "./components/Pharmacy/EditDrug/Index";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "add-drug",
         element: <AddDrug />,
-        action: addDrugAction,
+        action: AddDrugAction,
       },
       {
         path: "edit-drug/:drugId",

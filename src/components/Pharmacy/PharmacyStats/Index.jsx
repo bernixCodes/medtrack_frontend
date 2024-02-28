@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./pharmacyStats.css";
 
 const PharmacyStats = () => {
@@ -42,9 +43,9 @@ const PharmacyStats = () => {
           ></iframe>
         </div>
 
-        <a href="/pharmacy" className="modal__close">
+        <Link to="/pharmacy" className="modal__close">
           &times;
-        </a>
+        </Link>
       </div>
     </div>
   );

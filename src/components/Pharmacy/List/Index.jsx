@@ -44,7 +44,7 @@ const PharmacyList = () => {
       }
     );
     const res = await data.json();
-    window.location.href = "/pharmacy";
+    window.location.replace("/pharmacy");
     return res;
   };
 

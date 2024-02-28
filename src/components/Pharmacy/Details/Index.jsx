@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Form, useParams } from "react-router-dom";
+import { Form, Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import pic from "../../../assets/drug.jpg";
 import "./drugd.css";
@@ -139,9 +139,9 @@ const DrugDetail = () => {
           </>
         )}
       </div>
-      <a href="/pharmacy" className="modal__close">
+      <Link to="/pharmacy" className="modal__close">
         &times;
-      </a>
+      </Link>
     </div>
   );
 };

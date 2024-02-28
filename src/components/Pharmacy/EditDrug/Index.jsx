@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { Form, useParams } from "react-router-dom";
+import { Form, Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../AddDrug/addDrug.css";
 import "./EditDrug.css";
@@ -31,7 +31,7 @@ export const editDrug = async (data) => {
     body: JSON.stringify(data),
   });
   const res = await response.json();
-  window.location.href = "/pharmacy";
+  window.location.replace("/pharmacy");
   return res;
 };
 
@@ -166,9 +166,9 @@ const EditDrug = () => {
                 </button>
               </div>
             </Form>
-            <a href="/pharmacy" className="modal__close">
+            <Link to="/pharmacy" className="modal__close">
               &times;
-            </a>
+            </Link>
             {/* </div> */}
           </>
         )}
