@@ -28,11 +28,11 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/yourusername/pharmacy-lab-inventory.git
+   git clone https://github.com/bernixCodes/medtrack_frontend.git
    ```
 2. Navigate to the project directory
    ```sh
-   cd pharmacy-lab-inventory
+   cd medtrack_frontend
    ```
 3. Install npm packages
    ```sh
@@ -53,9 +53,6 @@ Contributions are what make the open-source community such a fantastic place to 
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
