@@ -32,7 +32,7 @@ const About = () => {
 
           <p>
             <i className="fa fa-check" aria-hidden="true"></i> &nbsp;
-            Streamlined Prescription Management
+            Prescription Management
           </p>
 
           <p>
