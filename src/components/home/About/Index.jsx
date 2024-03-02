@@ -1,5 +1,5 @@
 import "./about.css";
-import doc from "../../../assets/doc.png";
+import doc from "../../../assets/info.jpg";
 
 const About = () => {
   return (
@@ -7,52 +7,47 @@ const About = () => {
       <div className="about-info">
         <p className="about-us">About Us</p>
         <h2 className="title" data-aos="fade-right" data-aos-duration="2000">
-          Clinic with <span style={{ color: "#00BCD1" }}>innovative</span>{" "}
-          approach to treatment
+          MedCare <span style={{ color: "#00BCD1" }}>innovative</span> approach
+          to inventory management
         </h2>
         <p className="sub-title">
-          We provide the a wide range of medical services, so every person could
-          have the opportunity to receive qualitative medical help
+          We are committed to providing efficient services tailored to meet the
+          needs of all.
         </p>
 
         <div className="list-group">
           <p>
-            <i className="fa fa-check" aria-hidden="true"></i> &nbsp; Adult and
-            Children&apos;s Trauma Center
+            <i className="fa fa-check" aria-hidden="true"></i> &nbsp; Effortless
+            Drug Management
           </p>
           <p>
-            <i className="fa fa-check" aria-hidden="true"></i>&nbsp; Birthing
-            and Lactation Classes
-          </p>
-
-          <p>
-            <i className="fa fa-check" aria-hidden="true"></i> &nbsp;Dental and
-            Oral Surgery
+            <i className="fa fa-check" aria-hidden="true"></i>&nbsp;Seamless Lab
+            Services
           </p>
 
           <p>
-            <i className="fa fa-check" aria-hidden="true"></i> &nbsp;Heart and
-            Vascular Institute
+            <i className="fa fa-check" aria-hidden="true"></i> &nbsp; Reliable
+            Inventory Tracking
+          </p>
+
+          <p>
+            <i className="fa fa-check" aria-hidden="true"></i> &nbsp;
+            Streamlined Prescription Management
           </p>
 
           <p>
             <i className="fa fa-check" aria-hidden="true"></i>
-            &nbsp;Interventional Cardiology
+            &nbsp;Insightful Custom Reporting
           </p>
 
           <p>
-            <i className="fa fa-check" aria-hidden="true"></i>&nbsp;Ear, Nose
-            and Throat (ENT)
+            <i className="fa fa-check" aria-hidden="true"></i>&nbsp; Efficient
+            Integration
           </p>
 
           <p>
-            <i className="fa fa-check" aria-hidden="true"></i>&nbsp;Cardiac
-            Support Groups
-          </p>
-
-          <p>
-            <i className="fa fa-check" aria-hidden="true"></i> &nbsp;Pediatric
-            Emergency Care
+            <i className="fa fa-check" aria-hidden="true"></i> &nbsp;
+            Exceptional Customer Support
           </p>
 
           <button className="btn">Read More</button>

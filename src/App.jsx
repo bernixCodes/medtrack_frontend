@@ -2,13 +2,16 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./layouts/Home/Index";
 import PharmacyPage from "./layouts/Pharmacy/Index";
-import AddDrug, { AddDrugAction } from "./components/Pharmacy/AddDrug/Index";
-import EditDrug, { editDrug } from "./components/Pharmacy/EditDrug/Index";
+import AddDrug, {
+  addOrEditDrugAction,
+} from "./components/Pharmacy/AddDrug/Index";
+import EditDrug, { drugLoader } from "./components/Pharmacy/EditDrug/Index";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import PharmacyStats from "./components/Pharmacy/PharmacyStats/Index";
 import DrugDetail from "./components/Pharmacy/Details/Index";
 import LabPage from "./layouts/Lab/Index";
+import { drugsLoader } from "./components/Pharmacy/List/Index";
 
 AOS.init();
 const router = createBrowserRouter([
@@ -19,38 +22,27 @@ const router = createBrowserRouter([
   {
     path: "pharmacy",
     element: <PharmacyPage />,
-    loader: async () => {
-      const data = await fetch(
-        "https://medtrack-restapi.onrender.com/api/drugs",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "bernice",
-          },
-        }
-      );
-      const res = await data.json();
-      return res;
-    },
+    loader: drugsLoader,
     children: [
       {
         path: "add-drug",
         element: <AddDrug />,
-        action: AddDrugAction,
+        action: addOrEditDrugAction,
       },
       {
         path: "edit-drug/:drugId",
         element: <EditDrug />,
-        action: editDrug,
+        loader: drugLoader,
+        action: addOrEditDrugAction,
       },
       {
         path: "drug-stats",
         element: <PharmacyStats />,
       },
       {
-        path: "drug-detail/:id",
+        path: "drug-detail/:drugId",
         element: <DrugDetail />,
+        loader: drugLoader,
       },
     ],
   },

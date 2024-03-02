@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-between;
   /* gap: 5rem; */
-  background: #d4ecf7;
+  /* background: #d4ecf7; */
 overflow: hidden;
   position: relative;
   top: 2rem;
+  border: 2px solid #d4ecf7;
 }
 
 .img-div {

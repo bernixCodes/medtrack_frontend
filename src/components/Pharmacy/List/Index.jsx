@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
-import { Link, Outlet, useLoaderData } from "react-router-dom";
+import { Link, Outlet, useLoaderData, useRevalidator } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./pharmList.css";
 import DeleteModal from "../DeleteModal/Index";
 import Pagination from "../../globals/Pagination/Pagination";
 import Search from "./../../globals/Search/Index";
+import { fetchDrugs, deleteDrug } from "../../../api/drugs";
 
 const PharmacyList = () => {
   const allDrugs = useLoaderData();
+  const revalidator = useRevalidator();
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [drugIdToDelete, setDrugIdToDelete] = useState(null);
   const [drugToDelete, setDrugToDelete] = useState(null);
@@ -32,21 +35,6 @@ const PharmacyList = () => {
       return description;
     }
   }
-  const deleteAction = async (id) => {
-    const data = await fetch(
-      `https://medtrack-restapi.onrender.com/api/drugs/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "bernice",
-        },
-      }
-    );
-    const res = await data.json();
-    window.location.replace("/pharmacy");
-    return res;
-  };
 
   const handleDeleteDrug = async (id, drugName) => {
     setDrugIdToDelete(id);
@@ -55,7 +43,8 @@ const PharmacyList = () => {
   };
 
   const confirmDelete = async () => {
-    await deleteAction(drugIdToDelete);
+    await deleteDrug(drugIdToDelete);
+    revalidator.revalidate();
     setShowDeleteModal(false);
   };
 
@@ -172,3 +161,14 @@ const PharmacyList = () => {
 };
 
 export default PharmacyList;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export async function drugsLoader() {
+  const response = await fetchDrugs();
+  const res = await response.json();
+  if (!response.ok) {
+    console.log(res.mgs);
+    return null;
+  }
+  return res;
+}

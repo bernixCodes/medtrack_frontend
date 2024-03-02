@@ -1,14 +1,7 @@
 import CountUp from "react-countup";
 import "./homestats.css";
-// import { useRef } from "react";
 
 const HomeStats = () => {
-  // const counterRef = useRef(null);
-  // useCountUp({
-  //   enableScrollSpy: true,
-  //   scrollSpyDelay: 1500,
-  // });
-
   return (
     <div className="homestats">
       <div className="homestat-main">
@@ -16,7 +9,7 @@ const HomeStats = () => {
           <h3>
             <CountUp start={0} end={39} duration={20} useEasing={true} />
           </h3>
-          <h4>Years of experience</h4>
+          <h4>Years in operation</h4>
         </div>
 
         <div className="homestat-info">
@@ -31,7 +24,7 @@ const HomeStats = () => {
             {" "}
             <CountUp start={20} end={89} duration={40} useEasing={true} />
           </h3>
-          <h4> Hospital rooms</h4>
+          <h4> Proud Partners</h4>
         </div>
 
         <div className="homestat-info">
@@ -39,7 +32,7 @@ const HomeStats = () => {
             {" "}
             <CountUp start={100} end={301} duration={40} useEasing={true} />
           </h3>
-          <h4>Qualified doctors</h4>
+          <h4>100% Rating</h4>
         </div>
       </div>
     </div>

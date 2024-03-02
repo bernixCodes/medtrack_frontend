@@ -33,7 +33,7 @@
 
 .form {
   margin-top: 2rem;
-  width: 90%;
+  width: 80vw;
 }
 
 .form-group {
@@ -106,14 +106,11 @@ textarea {
   margin-left: 1rem;
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 1000px) {
   .form {
-    width: 80%;
+    width: 60vw;
   }
 }
 
-@media only screen and (min-width: 1250px) {
-  .form {
-    width: 60%;
-  }
-}
+
+

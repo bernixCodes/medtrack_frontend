@@ -1,6 +1,6 @@
 
 .modal-confirm {		
-	color: #636363;
+	color: #eee;
 	width: 400px;
 }
 .modal-confirm .modal-content {
@@ -25,7 +25,7 @@
 	right: -2px;
 }
 .modal-confirm .modal-body {
-	color: #999;
+	color: #eee;
 }
 .modal-confirm .modal-footer {
 	border: none;
