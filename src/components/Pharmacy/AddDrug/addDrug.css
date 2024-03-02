@@ -38,10 +38,19 @@
 
 .form-group {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 0 20px;
+  margin-top: 20px;
+
+}
+
+.row-on{
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group button{
+  margin-top: 2rem;
 }
 
 .form-group:last-child {
@@ -114,8 +123,8 @@ textarea {
 }
 
 
-@media only screen and (min-width: 1000px) {
-  .form-group {
+@media only screen and (min-width: 800px) {
+  .row-on {
     flex-direction: row;
   }
 }

@@ -77,7 +77,7 @@ const DrugForm = ({ method, drug }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group row-on">
           <div className="select">
             <label htmlFor="unit">Unit of Pricing</label>
             <Creatable
@@ -101,7 +101,7 @@ const DrugForm = ({ method, drug }) => {
             />
           </div>
 
-          <div className="select ml-1">
+          <div className="select ">
             <label htmlFor="price">Drug Price</label>
             <input
               type="text"
@@ -125,7 +125,7 @@ const DrugForm = ({ method, drug }) => {
           ></textarea>
         </div>
 
-        <div className="form-group">
+        <div className="form-group topp">
           <button
             className={`button-animation ${isSubmitting ? "loading" : ""}`}
           >
