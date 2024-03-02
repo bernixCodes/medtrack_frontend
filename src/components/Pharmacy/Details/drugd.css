@@ -18,7 +18,7 @@
     cursor: pointer;
     position: relative;
     transition: box-shadow .25s;
-    width: 60%;
+    width: 80%;
   }
   
   .card::before {

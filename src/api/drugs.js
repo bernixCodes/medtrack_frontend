@@ -23,6 +23,29 @@ export const addDrug = async (data) => {
   return response;
 };
 
+export const fetchDrugOptions = async () => {
+  const response = await fetch(`${API_ENDPOINT}/drugs/options`, {
+    method: "GET",
+    headers: {
+      Authorization: "bernice",
+      "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
+
+export const addDrugOption = async (data) => {
+  const response = await fetch(`${API_ENDPOINT}/drugs/options`, {
+    method: "POST",
+    headers: {
+      Authorization: "bernice",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response;
+};
+
 export const editDrug = async (id, data) => {
   const response = await fetch(`${API_ENDPOINT}/drugs/${id}`, {
     method: "PUT",

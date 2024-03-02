@@ -1,10 +1,54 @@
 /* eslint-disable react/prop-types */
 import { Form, useNavigation } from "react-router-dom";
+import Creatable from "react-select/creatable";
 import "./addDrug.css";
+import { fetchDrugOptions, addDrugOption } from "../../../api/drugs";
+import { useEffect, useState } from "react";
+
 // eslint-disable-next-line react/prop-types
 const DrugForm = ({ method, drug }) => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  const [options, setOptions] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  useEffect(() => {
+    const drugsOptionsLoader = async () => {
+      try {
+        const response = await fetchDrugOptions();
+        const res = await response.json();
+        if (!response.ok) {
+          console.log(res.mgs);
+          return;
+        }
+        console.log("res", res);
+        setOptions(res);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    drugsOptionsLoader();
+  }, []);
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
+
+  const handleCreate = async (newValue) => {
+    try {
+      const newValueLowerCase = capitalizeFirstLetter(newValue);
+      const newOption = { value: newValueLowerCase, label: newValueLowerCase };
+      setOptions([...options, newOption]);
+
+      await addDrugOption(newOption);
+    } catch (error) {
+      console.error("Error creating option:", error);
+    }
+  };
+  const handleSelectChange = (newValue) => {
+    setSelectedValue(newValue);
+  };
+
   return (
     <div>
       <Form method={method} className="form">
@@ -36,13 +80,25 @@ const DrugForm = ({ method, drug }) => {
         <div className="form-group">
           <div className="select">
             <label htmlFor="unit">Unit of Pricing</label>
-            <select name="unit" defaultValue={drug ? drug.unitPrice : ""}>
-              <option value={""}>Select</option>
-              <option value={"Tablet"}>Tablet</option>
-              <option value={"Capsule"}>Capsule</option>
-              <option value={"Vials"}>Vials</option>
-              <option value={"Ampule"}>Ampule</option>
-            </select>
+            <Creatable
+              onChange={handleSelectChange}
+              onCreateOption={handleCreate}
+              options={options}
+              value={selectedValue}
+              isClearable
+              name="unit"
+              defaultInputValue={drug ? drug.unitPrice : ""}
+              placeholder="Select or type to add"
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: state.isFocused ? "white" : "",
+                  border: state.isSelected ? "none" : baseStyles.border,
+                  padding: "4px",
+                  color: "black",
+                }),
+              }}
+            />
           </div>
 
           <div className="select ml-1">
@@ -88,3 +144,4 @@ const DrugForm = ({ method, drug }) => {
 };
 
 export default DrugForm;
+
