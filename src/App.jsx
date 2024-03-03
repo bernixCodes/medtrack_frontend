@@ -12,17 +12,25 @@ import PharmacyStats from "./components/Pharmacy/PharmacyStats/Index";
 import DrugDetail from "./components/Pharmacy/Details/Index";
 import LabPage from "./layouts/Lab/Index";
 import { drugsLoader } from "./components/Pharmacy/List/Index";
+import ErrorPage from "./layouts/Error";
+import { labsLoader } from "./components/Lab/List/Index";
+import AddLab, { addOrEditLabAction } from "./components/Lab/AddLab/Index";
+import LabDetail from "./components/Lab/LabDetail/Index";
+import EditLab, { labLoader } from "./components/Lab/EditLab/Index";
 
 AOS.init();
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    errorElement: <ErrorPage />,
   },
+
   {
     path: "pharmacy",
     element: <PharmacyPage />,
     loader: drugsLoader,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "add-drug",
@@ -50,6 +58,30 @@ const router = createBrowserRouter([
   {
     path: "labs",
     element: <LabPage />,
+    loader: labsLoader,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "add-lab",
+        element: <AddLab />,
+        action: addOrEditLabAction,
+      },
+      {
+        path: "edit-lab/:id",
+        element: <EditLab />,
+        loader: labLoader,
+        action: addOrEditLabAction,
+      },
+      {
+        path: "lab-stats",
+        element: <p>Lab Stats</p>,
+      },
+      {
+        path: "lab-detail/:id",
+        element: <LabDetail />,
+        loader: labLoader,
+      },
+    ],
   },
 ]);
 

@@ -24,9 +24,7 @@ const PharmacyList = () => {
   const firstIndex = lastIndex - listPerPage;
   const currentLists = filteredDrugs.slice(firstIndex, lastIndex);
 
-  useEffect(() => {
-    document.title = "MedCare | Pharmacy";
-  }, []);
+
 
   function truncateDescription(description, maxWords = 25) {
     if (description.length > maxWords) {
@@ -60,8 +58,7 @@ const PharmacyList = () => {
     const filteredData = allDrugs.filter(
       (drug) =>
         drug.drugName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        drug.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        drug.drugCode.toLowerCase().includes(searchTerm.toLowerCase())
+        drug.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredDrugs(filteredData);
   }, [allDrugs, searchTerm]);

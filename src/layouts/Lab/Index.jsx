@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Header from "../../components/home/Header/Index";
+import LabList from "../../components/Lab/List/Index";
 
 const LabPage = () => {
   useEffect(() => {
@@ -8,6 +9,7 @@ const LabPage = () => {
   return (
     <div>
       <Header />
+      <LabList />
     </div>
   );
 };

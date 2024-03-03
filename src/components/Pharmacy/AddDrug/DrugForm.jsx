@@ -21,7 +21,6 @@ const DrugForm = ({ method, drug }) => {
           console.log(res.mgs);
           return;
         }
-        console.log("res", res);
         setOptions(res);
       } catch (error) {
         console.log(error);

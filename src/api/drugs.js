@@ -5,7 +5,7 @@ export const fetchDrugs = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "bernice",
+      Authorization: "authorized",
     },
   });
   return response;
@@ -15,7 +15,7 @@ export const addDrug = async (data) => {
   const response = await fetch(`${API_ENDPOINT}/drugs`, {
     method: "POST",
     headers: {
-      Authorization: "bernice",
+      Authorization: "authorized",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -27,7 +27,7 @@ export const fetchDrugOptions = async () => {
   const response = await fetch(`${API_ENDPOINT}/drugs/options`, {
     method: "GET",
     headers: {
-      Authorization: "bernice",
+      Authorization: "authorized",
       "Content-Type": "application/json",
     },
   });
@@ -38,7 +38,7 @@ export const addDrugOption = async (data) => {
   const response = await fetch(`${API_ENDPOINT}/drugs/options`, {
     method: "POST",
     headers: {
-      Authorization: "bernice",
+      Authorization: "authorized",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -50,7 +50,7 @@ export const editDrug = async (id, data) => {
   const response = await fetch(`${API_ENDPOINT}/drugs/${id}`, {
     method: "PUT",
     headers: {
-      Authorization: "bernice",
+      Authorization: "authorized",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -62,7 +62,7 @@ export const fetchDrug = async (id) => {
   const response = await fetch(`${API_ENDPOINT}/drugs/${id}`, {
     method: "GET",
     headers: {
-      Authorization: "bernice",
+      Authorization: "authorized",
       "Content-Type": "application/json",
     },
   });
@@ -74,7 +74,7 @@ export const deleteDrug = async (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "bernice",
+      Authorization: "authorized",
     },
   });
   return response;

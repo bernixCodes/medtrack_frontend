@@ -1,13 +1,8 @@
 import { Link, useLoaderData, Await } from "react-router-dom";
 import { Suspense } from "react";
-import "./drugd.css";
 
-const DrugDetail = () => {
-  const drug = useLoaderData();
-
-  const descriptionWithSpaces = {
-    whiteSpace: "pre-wrap",
-  };
+const LabDetail = () => {
+  const labData = useLoaderData();
 
   return (
     <div className="wrapper">
@@ -19,10 +14,10 @@ const DrugDetail = () => {
             </div>
           }
         >
-          <Await resolve={drug}>
-            {(drug) => (
+          <Await resolve={labData}>
+            {(lab) => (
               <>
-                <h1 style={{ margin: "2rem 0" }}> {drug.drugName} Details</h1>
+                <h1 style={{ margin: "2rem 0" }}> {lab.labName} Details</h1>
                 <div className="card">
                   <span className="icon">
                     <svg
@@ -42,30 +37,35 @@ const DrugDetail = () => {
                   </span>
                   <div className="data">
                     <div>
-                      <h4>Drug Name </h4>
-                      <p>{drug.drugName}</p>
+                      <h4>Lab Item </h4>
+                      <p>{lab.labName}</p>
                     </div>
                     <div>
-                      <h4>Drug Code </h4>
-                      <p> {drug.drugCode}</p>
-                    </div>
-
-                    <div>
-                      <h4> Unit Pricing </h4>
-                      <p>{drug.unitPrice}</p>
+                      <h4>Lab Type</h4>
+                      <p> {lab.labType}</p>
                     </div>
 
                     <div>
-                      <h4> Drug Price </h4>
-                      <p>Ghc {drug.drugPrice}</p>
+                      <h4> Lab Code </h4>
+                      <p>{lab.labCode}</p>
+                    </div>
+
+                    <div>
+                      <h4> Main Lab Category </h4>
+                      <p> {lab.mainCategory}</p>
+                    </div>
+
+                    <div>
+                      <h4> Sub Lab Category </h4>
+                      <p> {lab.subCategory}</p>
                     </div>
                     <div>
-                      <h4> Description </h4>
-                      <p style={descriptionWithSpaces}>{drug.description}</p>
+                      <h4> Price </h4>
+                      <p>Ghc {lab.labPrice}</p>
                     </div>
                   </div>
                 </div>
-                <Link to="/pharmacy" className="modal__close">
+                <Link to="/labs" className="modal__close">
                   &times;
                 </Link>
               </>
@@ -77,4 +77,4 @@ const DrugDetail = () => {
   );
 };
 
-export default DrugDetail;
+export default LabDetail;
