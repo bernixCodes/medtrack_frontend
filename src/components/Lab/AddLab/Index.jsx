@@ -37,23 +37,25 @@ export async function addOrEditLabAction({ request, params }) {
     const id = params.id;
     const response = await editLab(id, labData);
     const data = await response.json();
+  
+    if (!response.ok) {
+      toast.error(data.mgs);
+      return null;
+    }
     toast.info("Edited successfully", {
       autoClose: 3000,
     });
-    if (!response.ok) {
-      toast.error(data);
-      return null;
-    }
   } else {
     const response = await addLab(labData);
     const data = await response.json();
+   
+    if (!response.ok) {
+      toast.error(data.mgs);
+      return null;
+    }
     toast.info("Added successfully", {
       autoClose: 3000,
     });
-    if (!response.ok) {
-      toast.error(data);
-      return null;
-    }
   }
 
   return redirect("/labs");

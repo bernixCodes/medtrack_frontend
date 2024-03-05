@@ -52,6 +52,7 @@ const PharmacyList = () => {
 
   const handleSearch = async (searchTerm) => {
     setSearchTerm(searchTerm);
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const PharmacyList = () => {
     );
     setFilteredDrugs(filteredData);
   }, [allDrugs, searchTerm]);
+
 
   return (
     <div className="pharm-list">

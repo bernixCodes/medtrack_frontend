@@ -21,7 +21,7 @@ const LabList = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   // eslint-disable-next-line no-unused-vars
-  const [listPerPage, setListPerPage] = useState(10);
+  const [listPerPage, setListPerPage] = useState(2);
   const lastIndex = currentPage * listPerPage;
   const firstIndex = lastIndex - listPerPage;
   const currentLists = filteredLabs.slice(firstIndex, lastIndex);
@@ -45,6 +45,7 @@ const LabList = () => {
 
   const handleSearch = async (searchTerm) => {
     setSearchTerm(searchTerm);
+    setCurrentPage(1);
   };
 
   const handleFilterByLabType = (labType) => {
@@ -55,15 +56,17 @@ const LabList = () => {
     const filteredData = allLabs.filter((lab) =>
       lab.labName.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    console.log(filteredData);
     if (filterByLabType) {
       const filteredByType = filteredData.filter(
-        (lab) => lab.labType === filterByLabType
+        (lab) => lab.labType == filterByLabType
       );
       setFilteredLabs(filteredByType);
     } else {
       setFilteredLabs(filteredData);
     }
   }, [allLabs, searchTerm, filterByLabType]);
+  
   return (
     <div className="pharm-list">
       <Outlet />

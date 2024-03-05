@@ -37,24 +37,26 @@ export async function addOrEditDrugAction({ request, params }) {
     const drugId = params.drugId;
     const response = await editDrug(drugId, drugData);
     const data = await response.json();
+
+    if (!response.ok) {
+      toast.error(data.mgs);
+      return null;
+    }
     toast.info("Edited successfully", {
       autoClose: 3000,
     });
-    if (!response.ok) {
-      toast.error(data);
-      return null;
-    }
   } else {
     const response = await addDrug(drugData);
     const data = await response.json();
+    if (!response.ok) {
+      toast.error(data.mgs);
+      return null;
+    }
     toast.info("Added successfully", {
       autoClose: 3000,
     });
-    if (!response.ok) {
-      toast.error(data);
-      return null;
-    }
   }
+
 
   return redirect("/pharmacy");
 }

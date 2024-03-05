@@ -14,12 +14,16 @@ const LabForm = ({ method, lab }) => {
   const navigation = useNavigation();
   const [mainCategories, setMainCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [selectedMainCat, setSelectedMainCat] = useState(null);
-  const [selectedSubCat, setSelectedSubCat] = useState(null);
+  const [selectedMainCat, setSelectedMainCat] = useState(
+    lab ? { value: lab.mainCategory, label: lab.mainCategory } : null
+  );
+  const [selectedSubCat, setSelectedSubCat] = useState(
+    lab ? { value: lab.subCategory, label: lab.subCategory } : null
+  );
 
   const isSubmitting = navigation.state === "submitting";
   const labTypeOptions = [
-    { value: "Laboratory ", label: "Laboratory " },
+    { value: "Laboratory", label: "Laboratory" },
     { value: "Radiology", label: "Radiology" },
   ];
 
