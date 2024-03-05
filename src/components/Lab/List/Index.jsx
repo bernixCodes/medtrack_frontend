@@ -4,6 +4,8 @@ import { fetchLabs, deleteLab } from "./../../../api/labs";
 import { useEffect, useState } from "react";
 import DeleteModal from "../../Pharmacy/DeleteModal/Index";
 import Pagination from "../../globals/Pagination/Pagination";
+import { toast } from "react-toastify";
+import "./labList.css";
 
 const LabList = () => {
   const allLabs = useLoaderData();
@@ -15,6 +17,7 @@ const LabList = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredLabs, setFilteredLabs] = useState([]);
+  const [filterByLabType, setFilterByLabType] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   // eslint-disable-next-line no-unused-vars
@@ -32,6 +35,7 @@ const LabList = () => {
   const confirmDelete = async () => {
     await deleteLab(labIdToDelete);
     revalidator.revalidate();
+    toast.error("Lab deleted!");
     setShowDeleteModal(false);
   };
 
@@ -43,13 +47,23 @@ const LabList = () => {
     setSearchTerm(searchTerm);
   };
 
+  const handleFilterByLabType = (labType) => {
+    setFilterByLabType(labType);
+  };
+
   useEffect(() => {
     const filteredData = allLabs.filter((lab) =>
       lab.labName.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setFilteredLabs(filteredData);
-  }, [allLabs, searchTerm]);
-
+    if (filterByLabType) {
+      const filteredByType = filteredData.filter(
+        (lab) => lab.labType === filterByLabType
+      );
+      setFilteredLabs(filteredByType);
+    } else {
+      setFilteredLabs(filteredData);
+    }
+  }, [allLabs, searchTerm, filterByLabType]);
   return (
     <div className="pharm-list">
       <Outlet />
@@ -76,7 +90,7 @@ const LabList = () => {
           <Search onSearch={handleSearch} />
         </div>
 
-        {allLabs ? (
+        {filteredLabs && filteredLabs.length > 0 ? (
           <>
             <table>
               <thead>
@@ -84,7 +98,29 @@ const LabList = () => {
                   <th scope="col" className="col-1">
                     Lab Item
                   </th>
-                  <th scope="col">Lab Type</th>
+                  <th scope="col" className="lab-type">
+                    Lab Type{" "}
+                    <div className="filter-dropdown">
+                      <button className="filter-button">
+                        <i className="fa fa-filter" aria-hidden="true"></i>
+                      </button>
+                      <div className="dropdown-content">
+                        <button onClick={() => handleFilterByLabType(null)}>
+                          All
+                        </button>
+                        <button
+                          onClick={() => handleFilterByLabType("Radiology")}
+                        >
+                          Radiology
+                        </button>
+                        <button
+                          onClick={() => handleFilterByLabType("Laboratory")}
+                        >
+                          Laboratory
+                        </button>
+                      </div>
+                    </div>
+                  </th>
                   <th scope="col">Category</th>
                   <th scope="col">Sub Category</th>
                   <th scope="col">Lab Code</th>
@@ -97,8 +133,12 @@ const LabList = () => {
                   <tr key={data._id} style={{ cursor: "pointer" }}>
                     <td data-label="Lab Item">{data.labName}</td>
                     <td data-label="Lab Type">{data.labType}</td>
-                    <td data-label="Category">{data.mainCategory}</td>
-                    <td data-label="Sub Category">{data.subCategory}</td>
+                    <td data-label="Category">
+                      {data.mainCategory ? data.mainCategory : "----"}
+                    </td>
+                    <td data-label="Sub Category">
+                      {data.subCategory ? data.subCategory : "----"}
+                    </td>
                     <td data-label="Lab Code">{data.labCode}</td>
                     <td data-label="Price">{data.labPrice}</td>
                     <td data-label="" className="action-icons">
@@ -131,7 +171,7 @@ const LabList = () => {
           </>
         ) : (
           <>
-            <p>No drugs available</p>
+            <p>No labs available</p>
           </>
         )}
       </div>

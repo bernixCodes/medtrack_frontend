@@ -11,7 +11,7 @@ import { useEffect } from "react";
 
 const HomePage = () => {
   useEffect(() => {
-    document.title = "MedCare | Home";
+    document.title = "MedTrack | Home";
   }, []);
   return (
     <>

@@ -17,6 +17,7 @@ import { labsLoader } from "./components/Lab/List/Index";
 import AddLab, { addOrEditLabAction } from "./components/Lab/AddLab/Index";
 import LabDetail from "./components/Lab/LabDetail/Index";
 import EditLab, { labLoader } from "./components/Lab/EditLab/Index";
+import LabStats from "./components/Lab/LabStats/Index";
 
 AOS.init();
 const router = createBrowserRouter([
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
       },
       {
         path: "lab-stats",
-        element: <p>Lab Stats</p>,
+        element: <LabStats />,
       },
       {
         path: "lab-detail/:id",

@@ -23,6 +23,51 @@ export const addLab = async (data) => {
   return response;
 };
 
+export const fetchMainCategory = async () => {
+  const response = await fetch(`${API_ENDPOINT}/labs/mainCategory`, {
+    method: "GET",
+    headers: {
+      Authorization: "authorized",
+      "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
+
+export const fetchSubCategory = async () => {
+  const response = await fetch(`${API_ENDPOINT}/labs/subCategory`, {
+    method: "GET",
+    headers: {
+      Authorization: "authorized",
+      "Content-Type": "application/json",
+    },
+  });
+  return response;
+};
+
+export const addMainCategory = async (data) => {
+  const response = await fetch(`${API_ENDPOINT}/labs/mainCategory`, {
+    method: "POST",
+    headers: {
+      Authorization: "authorized",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response;
+};
+
+export const addSubCategory = async (data) => {
+  const response = await fetch(`${API_ENDPOINT}/labs/subCategory`, {
+    method: "POST",
+    headers: {
+      Authorization: "authorized",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response;
+};
 export const editLab = async (id, data) => {
   const response = await fetch(`${API_ENDPOINT}/labs/${id}`, {
     method: "PUT",

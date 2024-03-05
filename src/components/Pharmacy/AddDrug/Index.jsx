@@ -2,6 +2,7 @@ import { Link, redirect } from "react-router-dom";
 import { addDrug, editDrug } from "../../../api/drugs";
 import DrugForm from "./DrugForm";
 import "./addDrug.css";
+import { toast } from "react-toastify";
 
 const AddDrug = () => {
   return (
@@ -36,15 +37,21 @@ export async function addOrEditDrugAction({ request, params }) {
     const drugId = params.drugId;
     const response = await editDrug(drugId, drugData);
     const data = await response.json();
+    toast.info("Edited successfully", {
+      autoClose: 3000,
+    });
     if (!response.ok) {
-      console.log(data);
+      toast.error(data);
       return null;
     }
   } else {
     const response = await addDrug(drugData);
     const data = await response.json();
+    toast.info("Added successfully", {
+      autoClose: 3000,
+    });
     if (!response.ok) {
-      console.log(data);
+      toast.error(data);
       return null;
     }
   }

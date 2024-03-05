@@ -29,3 +29,11 @@
     background: #346bae;
     color: #fff;
 }
+
+@media only screen and (min-width: 760px) {
+    .pagination {
+        position: absolute;
+        bottom: 2;
+        right: 4rem;
+    }
+}

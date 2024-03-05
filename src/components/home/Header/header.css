@@ -11,10 +11,21 @@ nav {
   display: none;
 }
 
-.logo {
-  object-fit: contain;
-  width: 120px;
+.logo-div{
+  display: flex;
+  gap: 10px;
+  object-fit: cover;
+  width: 25px;
+  height: 25px;
+  align-items: center;
 }
+
+.logo-div p{
+  font-size: 21px;
+  font-weight: 700;
+}
+
+
 
 .navLinks {
   display: flex;
@@ -40,7 +51,7 @@ nav {
   }
 
   .nav-data {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
   }
 

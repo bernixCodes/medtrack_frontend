@@ -1,6 +1,7 @@
 import { Link, redirect } from "react-router-dom";
 import LabForm from "./LabForm";
 import { addLab, editLab } from "../../../api/labs";
+import { toast } from "react-toastify";
 
 const AddLab = () => {
   return (
@@ -36,15 +37,21 @@ export async function addOrEditLabAction({ request, params }) {
     const id = params.id;
     const response = await editLab(id, labData);
     const data = await response.json();
+    toast.info("Edited successfully", {
+      autoClose: 3000,
+    });
     if (!response.ok) {
-      console.log(data);
+      toast.error(data);
       return null;
     }
   } else {
     const response = await addLab(labData);
     const data = await response.json();
+    toast.info("Added successfully", {
+      autoClose: 3000,
+    });
     if (!response.ok) {
-      console.log(data);
+      toast.error(data);
       return null;
     }
   }

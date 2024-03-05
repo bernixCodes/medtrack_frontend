@@ -27,7 +27,7 @@ const PharmacyStats = () => {
             }}
             width="640"
             height="480"
-            src="https://charts.mongodb.com/charts-medtrack-kdrtb/embed/charts?id=65d4a71f-db6b-4d90-8bbd-8b10c8146dd2&maxDataAge=300&theme=light&autoRefresh=true"
+            src="https://charts.mongodb.com/charts-medtrack-kdrtb/embed/charts?id=65d4a71f-db6b-4d90-8bbd-8b10c8146dd2&maxDataAge=60&theme=light&autoRefresh=true"
           ></iframe>
 
           <iframe

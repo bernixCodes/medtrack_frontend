@@ -52,12 +52,16 @@ const LabDetail = () => {
 
                     <div>
                       <h4> Main Lab Category </h4>
-                      <p> {lab.mainCategory}</p>
+                      <p>
+                        {lab.mainCategory ? lab.mainCategory : "Not provided"}
+                      </p>
                     </div>
 
                     <div>
                       <h4> Sub Lab Category </h4>
-                      <p> {lab.subCategory}</p>
+                      <p>
+                        {lab.subCategory ? lab.subCategory : "Not provided"}
+                      </p>
                     </div>
                     <div>
                       <h4> Price </h4>

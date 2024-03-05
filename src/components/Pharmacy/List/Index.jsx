@@ -6,6 +6,7 @@ import DeleteModal from "../DeleteModal/Index";
 import Pagination from "../../globals/Pagination/Pagination";
 import Search from "./../../globals/Search/Index";
 import { fetchDrugs, deleteDrug } from "../../../api/drugs";
+import { toast } from "react-toastify";
 
 const PharmacyList = () => {
   const allDrugs = useLoaderData();
@@ -24,9 +25,7 @@ const PharmacyList = () => {
   const firstIndex = lastIndex - listPerPage;
   const currentLists = filteredDrugs.slice(firstIndex, lastIndex);
 
-
-
-  function truncateDescription(description, maxWords = 25) {
+  function truncateDescription(description, maxWords = 30) {
     if (description.length > maxWords) {
       return description.slice(0, maxWords) + "...";
     } else {
@@ -43,6 +42,7 @@ const PharmacyList = () => {
   const confirmDelete = async () => {
     await deleteDrug(drugIdToDelete);
     revalidator.revalidate();
+    toast.error("Drug deleted!");
     setShowDeleteModal(false);
   };
 
@@ -58,7 +58,8 @@ const PharmacyList = () => {
     const filteredData = allDrugs.filter(
       (drug) =>
         drug.drugName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        drug.description.toLowerCase().includes(searchTerm.toLowerCase())
+        drug.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        drug.drugCode.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredDrugs(filteredData);
   }, [allDrugs, searchTerm]);
